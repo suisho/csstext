@@ -1,5 +1,5 @@
 
-var ast = require("../lib/ast.js")
+var declarations = require("../lib/declarations.js")
 var assert = require("assert")
 describe("",function(){
   var obj = {
