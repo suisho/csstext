@@ -1,4 +1,4 @@
-var parse = require("../parse.js")
+var parse = require("../lib/parse.js")
 var assert = require("assert")
 describe("",function(){
   var text = 'color: red; background-color: blue;'
@@ -10,7 +10,7 @@ describe("",function(){
       "background-color" : "blue",
     })
   })
-  
+
   it("sorted", function(){
     assert.deepEqual(Object.keys(result), [
       "background-color",
