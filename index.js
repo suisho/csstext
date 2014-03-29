@@ -1,4 +1,9 @@
 var qs = require('querystring')
+// no escape
+qs.escape = function(str){
+  return str
+}
+
 // parse cssText and sorted property csstext
 module.exports = function(cssText){
   if(typeof cssText === "string"){
