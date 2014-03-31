@@ -1,25 +1,29 @@
-var qs = require('querystring')
+var cssqs = require('querystring')
 // no escape
-qs.escape = function(str){
+cssqs.escape = function(str){
+  return str
+}
+
+cssqs.unescape = function(str){
   return str
 }
 
 module.exports.parse = function(cssText){
-  qs.parse(cssText,";", ":")
+  var parsed = cssqs.parse(cssText,";", ":")
+  return filteringObj(parsed)
 }
 // parse cssText and sorted property csstext
 module.exports.stringify = function(cssText){
-  var parsed = cssText
-
   // trim
-  return Object.keys(parsed).sort().filter(function(key){
-    return (key !== '')
-  }).map(function(key){
-    var value = parsed[key]
-    if(typeof value == "string"){
-      value = value.trim()
-    }
-    key = key.trim()
-    return key + ":" + value
-  }).join(";")
+  var obj = filteringObj(cssText)
+
+  return cssqs.stringify(obj, ";", ":") + ";"
+}
+var filteringObj = function(obj){
+  var trimed = {}
+  Object.keys(obj).sort().forEach(function(key){
+    if(key === '' || obj[key] === '') return
+    trimed[key.trim()] = obj[key].trim()
+  })
+  return trimed
 }
