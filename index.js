@@ -16,14 +16,18 @@ module.exports.parse = function(cssText){
 module.exports.stringify = function(cssText){
   // trim
   var obj = filteringObj(cssText)
-
+  if(Object.keys(obj).length == 0){ // == {}
+    return ""
+  }
   return cssqs.stringify(obj, ";", ":") + ";"
 }
 var filteringObj = function(obj){
   var trimed = {}
   Object.keys(obj).sort().forEach(function(key){
-    if(key === '' || obj[key] === '') return
-    trimed[key.trim()] = obj[key].trim()
+    value = obj[key]
+    if(key === '' || value === '') return
+    trimed[key.trim()] = value.trim()
   })
+  console.log(trimed)
   return trimed
 }
