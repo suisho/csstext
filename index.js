@@ -21,6 +21,7 @@ module.exports.stringify = function(cssText){
   }
   return cssqs.stringify(obj, ";", ":") + ";"
 }
+
 var filteringObj = function(obj){
   var trimed = {}
   Object.keys(obj).sort().forEach(function(key){
@@ -28,6 +29,5 @@ var filteringObj = function(obj){
     if(key === '' || value === '') return
     trimed[key.trim()] = value.trim()
   })
-  console.log(trimed)
   return trimed
 }
